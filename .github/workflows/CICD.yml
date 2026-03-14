@@ -1,0 +1,34 @@
+name: CICD
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+
+    code:
+        runs-on: ubuntu-latest
+        steps:
+         - name: checkout code
+           run: echo "checkout the latest code"
+
+    build:
+        needs: code
+        runs-on: ubuntu-latest
+        steps:
+        - name: build the pipeline
+          run: echo "build started"
+
+    test:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+        - name: Test the code
+          run: echo "testing is in progress"
+
+    deploy:
+        needs: [build,test]
+        runs-on: ubuntu-latest
+        steps:
+        - name: deploy job
+          run: echo "deployment is in progress"
